@@ -17,6 +17,7 @@ class App extends React.Component{
       q: 'clout',
       d: 'money',
       s: 'free',
+      w:'yahoo',
       text: ''
 
     }
@@ -44,12 +45,19 @@ class App extends React.Component{
     var keys = ['q','w','e','a','s','d','z','x','c'];
     if(keys.includes(event.key)){
       this[event.key].current.play()
-      this.setState({text:event.key})
+      this.setState({text:this.state[event.key]})
  }
+  }
+  componentDidMount(){
+      document.addEventListener("keydown", this.handleKeyPress.bind(this))
+  }
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.handleKeyPress.bind(this))
   }
   ActiveMusic(music){
     this[music].current.play()
-    this.setState({text:music})
+    this.setState({text:this.state[music]})
+
   }
   render(){
   return (
